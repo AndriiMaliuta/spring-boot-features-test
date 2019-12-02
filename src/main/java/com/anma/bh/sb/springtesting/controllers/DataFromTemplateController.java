@@ -53,12 +53,6 @@ public class DataFromTemplateController {
 //        System.out.println(convertedObject.toString());
 
 
-
-
-
-
-
-
         return "data-from-url";
     }
 }
