@@ -1,5 +1,8 @@
 package com.anma.bh.sb.springtesting;
 
+import com.anma.bh.sb.springtesting.services.netcore.CoreNetServiceImpl;
+import com.anma.bh.sb.springtesting.services.okhttp.OkHttpService;
+import com.anma.bh.sb.springtesting.services.okhttp.OkHttpServiceImpl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -11,54 +14,34 @@ import java.nio.charset.Charset;
 
 public class Tester {
 
-    private static String readUrl(String urlString) throws Exception {
+    private static void testCoreNet(String url) throws Exception {
 
-        BufferedReader reader = null;
+        String jsonString = new CoreNetServiceImpl().readUrl(url);
 
-        try {
-
-            URL url = new URL(urlString);
-
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            StringBuffer buffer = new StringBuffer();
-
-            int read;
-
-            char[] chars = new char[1024];
-
-            while ((read = reader.read(chars)) != -1)
-
-                buffer.append(chars, 0, read);
-
-            return buffer.toString();
-
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-
-//        String jsonString = "{\"name\":\"Mahesh\", \"age\":21}";
-
-        String jsonString = readUrl ("https://jsonplaceholder.typicode.com/users/1");
-//        String jsonString = readUrl ("https://swapi.co/api/vehicles/4");
-
-        GsonBuilder builder = new GsonBuilder();
-
-        builder.setPrettyPrinting();
-
-        Gson gson = builder.create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
 
-//        System.out.println(jsonObject);
-        System.out.println(jsonObject);
+        System.out.println(jsonObject.get("username"));
 
-        jsonString = gson.toJson(jsonObject);
 
-//        System.out.println(jsonString);
+    }
+
+    private static void testOkHttp(String url) throws IOException {
+
+        String jsonString = new OkHttpServiceImpl().getBody(url);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
+
+        System.out.println(jsonObject.get("username"));
+    }
+
+
+    public static void main(String[] args) throws Exception {
+
+        testOkHttp("https://jsonplaceholder.typicode.com/users/1");
+
     }
 }
