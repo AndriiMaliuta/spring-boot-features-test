@@ -15,9 +15,14 @@ public class UnirestServiceImpl implements UnirestService {
 
         HttpResponse<JsonNode> response = Unirest.get(url).asJson();
 
-//        JSONObject jsonObject = response.getBody().getObject();
-
         return response;
+
+    }
+
+    @Override
+    public String getBody(String url) throws UnirestException {
+
+        return Unirest.get(url).asJson().getBody().toString();
 
     }
 }

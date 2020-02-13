@@ -7,4 +7,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 public interface UnirestService {
 
     HttpResponse<JsonNode> getResponse (String url) throws UnirestException;
+
+    String getBody (String url) throws UnirestException;
 }
