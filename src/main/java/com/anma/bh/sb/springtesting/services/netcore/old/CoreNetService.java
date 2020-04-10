@@ -1,4 +1,4 @@
-package com.anma.bh.sb.springtesting.services.netcore;
+package com.anma.bh.sb.springtesting.services.netcore.old;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

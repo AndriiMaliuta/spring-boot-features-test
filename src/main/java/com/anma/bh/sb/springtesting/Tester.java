@@ -1,7 +1,6 @@
 package com.anma.bh.sb.springtesting;
 
-import com.anma.bh.sb.springtesting.services.netcore.CoreNetServiceImpl;
-import com.anma.bh.sb.springtesting.services.okhttp.OkHttpService;
+import com.anma.bh.sb.springtesting.services.netcore.old.CoreNetServiceImpl;
 import com.anma.bh.sb.springtesting.services.okhttp.OkHttpServiceImpl;
 import com.anma.bh.sb.springtesting.services.unirest.UnirestServiceImpl;
 import com.google.gson.Gson;
@@ -10,9 +9,6 @@ import com.google.gson.JsonObject;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
 
 public class Tester {
 
@@ -56,11 +52,13 @@ public class Tester {
 
     public static void main(String[] args) throws Exception {
 
+        System.out.println(new CoreNetServiceImpl().readUrl("https://api.privatbank.ua/p24api/exchange_rates?json&date=01.04.2020"));
+
 //        testUnirest(URL);
 
 //        new UnirestServiceImpl().getResponse(URL).getHeaders().forEach((k, v) -> System.out.println(k + " ======= " + v));
 
-        System.out.println(new OkHttpServiceImpl().getResponse(URL).message());
+//        System.out.println(new OkHttpServiceImpl().getResponse(URL).message());
 
     }
 }
