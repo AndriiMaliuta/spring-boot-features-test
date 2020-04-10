@@ -7,4 +7,7 @@ import java.net.http.HttpRequest;
 public interface Core9HttpService {
 
     HttpRequest getGETRequest(String url) throws MalformedURLException, URISyntaxException;
+
     HttpRequest getPOSTRequest(String url, String body) throws URISyntaxException;
+
+}

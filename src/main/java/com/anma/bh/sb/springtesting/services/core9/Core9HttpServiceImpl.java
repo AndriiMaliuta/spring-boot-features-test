@@ -5,6 +5,7 @@ import java.net.PasswordAuthentication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
@@ -33,23 +34,31 @@ public class Core9HttpServiceImpl implements Core9HttpService {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("https://postman-echo.com/post"))
                 .headers("Content-Type", "text/plain;charset=UTF-8")
-                .POST(HttpRequest.BodyProcessor.fromByteArray(sampleData))
+//                .POST(HttpRequest.BodyProcessor.fromByteArray(sampleData))
                 .build();
 
         return null;
     }
 
-    public void auth() throws URISyntaxException {
+//    public void auth() throws URISyntaxException {
+//
+//        HttpResponse<String> response = HttpClient.newBuilder()
+//                .authenticator(new Authenticator() {
+//                    @Override
+//                    protected PasswordAuthentication getPasswordAuthentication() {
+//                        return new PasswordAuthentication(
+//                                "username",
+//                                "password".toCharArray());
+//                    }
+//                }).build()
+//                .send(getGETRequest(""), HttpResponse.BodyHandler.asString());
+//    }
 
-        HttpResponse<String> response = HttpClient.newBuilder()
-                .authenticator(new Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(
-                                "username",
-                                "password".toCharArray());
-                    }
-                }).build()
-                .send(getGETRequest(""), HttpResponse.BodyHandler.asString());
-    }
+//    public HttpResponse<String> getResponse(String url) throws URISyntaxException {
+//
+//        HttpResponse<String> response = HttpClient.newHttpClient()
+//                .send(getGETRequest(url), HttpResponse.BodyHandler.asString();
+//
+//        HttpHeaders responseHeaders = response.headers();
+//    }
 }
