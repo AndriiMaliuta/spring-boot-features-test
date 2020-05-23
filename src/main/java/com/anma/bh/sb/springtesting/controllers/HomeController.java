@@ -49,6 +49,9 @@ public class HomeController {
         }
 //        request.getParameterValues();
 
+        System.out.println("+++++++++++++ Parameters Map :");
+        paramsMap.entrySet().forEach(e -> System.out.println(e.getKey() + " ::: " + e.getValue()[0]));
+
         return "home";
 
     }
