@@ -1,11 +1,9 @@
-package com.anma.bh.sb.springtesting.models;
+package com.anma.bh.sb.springtesting.core.models;
 
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +11,7 @@ import java.util.UUID;
 public class Building {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "building_id")
     private UUID id;
 

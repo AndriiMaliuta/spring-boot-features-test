@@ -1,9 +1,10 @@
-package com.anma.bh.sb.springtesting.controllers;
+package com.anma.bh.sb.springtesting.core.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 public class HomeController {
 
     @RequestMapping({"/home", "/"})
-    public String hetHomePage(HttpServletRequest request) {
+    public String hetHomePage(HttpServletRequest request, Principal principal) {
 
         System.out.println("Context Path = " + request.getContextPath());
         ;

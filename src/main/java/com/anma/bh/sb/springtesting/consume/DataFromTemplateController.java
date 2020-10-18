@@ -1,4 +1,4 @@
-package com.anma.bh.sb.springtesting.controllers;
+package com.anma.bh.sb.springtesting.consume;
 
 import com.google.gson.*;
 import org.springframework.http.ResponseEntity;

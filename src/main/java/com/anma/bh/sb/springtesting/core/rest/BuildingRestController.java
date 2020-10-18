@@ -1,7 +1,9 @@
-package com.anma.bh.sb.springtesting.rest;
+package com.anma.bh.sb.springtesting.core.rest;
 
-import com.anma.bh.sb.springtesting.models.Building;
-import com.anma.bh.sb.springtesting.repositories.BuildingRepository;
+import com.anma.bh.sb.springtesting.core.models.Building;
+import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,11 @@ public class BuildingRestController {
     public List<Building> getAllBuildings() {
 
         return buildingRepository.findAll();
+    }
+
+    @GetMapping("/paged")
+    public Page<Building> getAllPosts(Pageable pageable) {
+        return buildingRepository.findAll(pageable);
     }
 
     @GetMapping("{building_id}")

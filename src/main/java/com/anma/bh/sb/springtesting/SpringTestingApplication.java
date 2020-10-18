@@ -1,9 +1,14 @@
 package com.anma.bh.sb.springtesting;
 
+import com.anma.bh.sb.springtesting.files.FileStorageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
+@EnableConfigurationProperties({
+		FileStorageProperties.class
+})
 public class SpringTestingApplication {
 
 	public static void main(String[] args) {

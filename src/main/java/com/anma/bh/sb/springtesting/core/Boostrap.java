@@ -1,7 +1,7 @@
-package com.anma.bh.sb.springtesting;
+package com.anma.bh.sb.springtesting.core;
 
-import com.anma.bh.sb.springtesting.models.Building;
-import com.anma.bh.sb.springtesting.repositories.BuildingRepository;
+import com.anma.bh.sb.springtesting.core.models.Building;
+import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
