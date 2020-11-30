@@ -1,6 +1,8 @@
 package com.anma.bh.sb.springtesting.consume;
 
+import com.anma.bh.sb.springtesting.core.models.Post;
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -20,7 +24,7 @@ import java.nio.charset.Charset;
 public class DataFromTemplateController {
 
     @GetMapping("/from-url")
-    public String getData(Model model) throws IOException {
+    public String getData(Model model) throws IOException, URISyntaxException {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -32,9 +36,14 @@ public class DataFromTemplateController {
 
 //        JsonObject jsonObject = new JsonParser().parse("{\"name\" : \" Andrii\"}").getAsJsonObject();
 
-//        JsonObject convertedObject = new Gson().fromJson("https://jsonplaceholder.typicode.com/posts/", JsonObject.class);
+        JsonReader jsonReader = new JsonReader(new BufferedReader(new InputStreamReader(new URL("").openStream())));
+        
+        Post convertedObject = new Gson()
+                .fromJson(new BufferedReader(
+                        new InputStreamReader(
+                                new URL("https://jsonplaceholder.typicode.com/posts/1").openStream())), Post.class);
 
-//        JsonObject jsonObject = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/1", JsonObject.class);
+        JsonObject jsonObject = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/1", JsonObject.class);
 //        JsonObject responseEntity = gson.fromJson("https://jsonplaceholder.typicode.com/posts/1", ResponseEntity.class);
 
 //        Object  jsonObject = restTemplate.getForEntity("https://swapi.co/api/vehicles/4/", Object.class);
@@ -43,13 +52,16 @@ public class DataFromTemplateController {
         ResponseEntity<Object[]> objects = restTemplate.getForEntity("https://jsonplaceholder.typicode.com/posts", Object[].class);
 //        Object[] objects = restTemplate.getForObject("https://swapi.co/api/vehicles", Object[].class);
 
-        JsonArray jsonArray = (JsonArray) objects.getBody()[0];
+//        JsonArray jsonArray = (JsonArray) objects.getBody()[0];
+        String body = objects.toString();
 
-//        model.addAttribute("jsonObject", jsonObject);
-        model.addAttribute("jsonObject", jsonArray);
+        System.out.println(convertedObject);
+
+//        String title = convertedObject.get("title").toString();
+        model.addAttribute("convertedObject", convertedObject);
 
 //        System.out.println(jsonObject);
-        System.out.println(jsonArray);
+//        System.out.println(jsonArray);
 //        System.out.println(convertedObject.toString());
 
 

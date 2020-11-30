@@ -15,11 +15,8 @@ public class HomeController {
     public String hetHomePage(HttpServletRequest request, Principal principal) {
 
         System.out.println("Context Path = " + request.getContextPath());
-        ;
         System.out.println("Remote user = " + request.getRemoteUser());
-        ;
         System.out.println("Servlet Path == " + request.getServletPath());
-        ;
         System.out.println("Path info == " + request.getPathInfo());
         System.out.println("URI == " + request.getRequestURI());
         System.out.println("URL == " + request.getRequestURL());
