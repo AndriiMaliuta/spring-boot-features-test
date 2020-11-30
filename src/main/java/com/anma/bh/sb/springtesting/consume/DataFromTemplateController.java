@@ -36,8 +36,8 @@ public class DataFromTemplateController {
 
 //        JsonObject jsonObject = new JsonParser().parse("{\"name\" : \" Andrii\"}").getAsJsonObject();
 
-        JsonReader jsonReader = new JsonReader(new BufferedReader(new InputStreamReader(new URL("").openStream())));
-        
+//        JsonReader jsonReader = new JsonReader(new BufferedReader(new InputStreamReader(new URL("").openStream())));
+
         Post convertedObject = new Gson()
                 .fromJson(new BufferedReader(
                         new InputStreamReader(
