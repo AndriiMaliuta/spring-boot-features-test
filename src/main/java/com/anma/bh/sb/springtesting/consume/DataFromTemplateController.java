@@ -28,42 +28,32 @@ public class DataFromTemplateController {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        GsonBuilder builder = new GsonBuilder();
-
+/*        GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
-
         Gson gson = builder.create();
-
-//        JsonObject jsonObject = new JsonParser().parse("{\"name\" : \" Andrii\"}").getAsJsonObject();
-
-//        JsonReader jsonReader = new JsonReader(new BufferedReader(new InputStreamReader(new URL("").openStream())));
-
         Post convertedObject = new Gson()
                 .fromJson(new BufferedReader(
                         new InputStreamReader(
                                 new URL("https://jsonplaceholder.typicode.com/posts/1").openStream())), Post.class);
+       System.out.println(convertedObject);
+       model.addAttribute("convertedObject", convertedObject);
+ */
 
+//        ResponseEntity responseEntity = gson.fromJson("https://jsonplaceholder.typicode.com/posts/1", ResponseEntity.class);
         JsonObject jsonObject = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/1", JsonObject.class);
-//        JsonObject responseEntity = gson.fromJson("https://jsonplaceholder.typicode.com/posts/1", ResponseEntity.class);
+        Object responseEntity = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/2", Object.class);
+        Post responseEntity2 = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/1", Post.class);
 
 //        Object  jsonObject = restTemplate.getForEntity("https://swapi.co/api/vehicles/4/", Object.class);
 //        JsonObject  jsonObject = restTemplate.getForEntity("https://jsonplaceholder.typicode.com/posts/1", JsonObject.class);
 
-        ResponseEntity<Object[]> objects = restTemplate.getForEntity("https://jsonplaceholder.typicode.com/posts", Object[].class);
 //        Object[] objects = restTemplate.getForObject("https://swapi.co/api/vehicles", Object[].class);
-
 //        JsonArray jsonArray = (JsonArray) objects.getBody()[0];
-        String body = objects.toString();
 
-        System.out.println(convertedObject);
-
-//        String title = convertedObject.get("title").toString();
-        model.addAttribute("convertedObject", convertedObject);
-
-//        System.out.println(jsonObject);
-//        System.out.println(jsonArray);
-//        System.out.println(convertedObject.toString());
-
+        model.addAttribute("responseEntity2", responseEntity2);
+        System.out.println(responseEntity);
+        System.out.println(responseEntity2);
+        System.out.println(jsonObject);
 
         return "data-from-url";
     }
