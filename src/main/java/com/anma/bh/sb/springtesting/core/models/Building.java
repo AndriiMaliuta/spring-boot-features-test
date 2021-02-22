@@ -1,13 +1,20 @@
 package com.anma.bh.sb.springtesting.core.models;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
 @Data
+@Builder
+@Table(name = "buildings")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Building {
 
     @Id
@@ -17,11 +24,8 @@ public class Building {
 
     private String street;
 
-    private short houseNumber;
+    private int houseNumber;
 
-    private short entrance;
-
-
-
+    private int entrance;
 
 }

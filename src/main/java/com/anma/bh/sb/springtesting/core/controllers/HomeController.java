@@ -12,7 +12,7 @@ import java.util.Map;
 public class HomeController {
 
     @RequestMapping({"/home", "/"})
-    public String hetHomePage(HttpServletRequest request, Principal principal) {
+    public String getHomePage(HttpServletRequest request, Principal principal) {
 
         System.out.println("Context Path = " + request.getContextPath());
         System.out.println("Remote user = " + request.getRemoteUser());
