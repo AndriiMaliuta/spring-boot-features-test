@@ -5,14 +5,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Enumeration;
 import java.util.Map;
 
 @Controller
 public class HomeController {
 
-    @RequestMapping({"/home", "/"})
+    @RequestMapping({"/"})
     public String getHomePage(HttpServletRequest request, Principal principal) {
+
+        System.out.println("////////////" + LocalDateTime.now());
 
         System.out.println("Context Path = " + request.getContextPath());
         System.out.println("Remote user = " + request.getRemoteUser());
@@ -30,6 +33,7 @@ public class HomeController {
 //        }
 
         Enumeration<String> attrNames = request.getAttributeNames();
+
 
         System.out.println("++++++++ Attributes:");
         while (attrNames.hasMoreElements()) {
