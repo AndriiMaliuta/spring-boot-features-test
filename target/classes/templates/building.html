@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Building</title>
+    <link rel="stylesheet" href="../../../styles/main.css">
+</head>
+<body>
+    <h2>Buildings</h2>
+
+    <div th:each="building : ${buildings}">
+        <p th:text="${building.BUILDING_ID}"></p>
+        <p th:text="${building.ENTRANCE}"></p>
+        <p th:text="${building.HOUSE_NUMBER}"></p>
+    </div>
+</body>
+
+</html>
