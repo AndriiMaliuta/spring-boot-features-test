@@ -1,4 +1,4 @@
-package com.anma.bh.sb.springtesting.core;
+package com.anma.bh.sb.springtesting;
 
 import com.anma.bh.sb.springtesting.core.models.Building;
 import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
