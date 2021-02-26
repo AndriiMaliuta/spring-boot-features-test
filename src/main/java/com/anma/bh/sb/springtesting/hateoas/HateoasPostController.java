@@ -1,6 +1,5 @@
 package com.anma.bh.sb.springtesting.hateoas;
 
-import com.anma.bh.sb.springtesting.core.models.Post;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
