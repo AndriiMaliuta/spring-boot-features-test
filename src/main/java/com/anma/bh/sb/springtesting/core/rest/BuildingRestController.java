@@ -5,6 +5,7 @@ import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,10 +35,10 @@ public class BuildingRestController {
         return buildingRepository.findAll(pageable);
     }
 
-    @GetMapping("{building_id}")
+    @GetMapping("{buildingId}")
     @ResponseStatus(HttpStatus.OK)
-    public Building getBuilding(@PathVariable UUID building_id) {
+    public ResponseEntity<Building> getBuilding(@PathVariable UUID buildingId) {
 
-        return buildingRepository.findById(building_id).get();
+        return ResponseEntity.ok().body(buildingRepository.findById(buildingId).get());
     }
 }

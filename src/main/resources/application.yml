@@ -5,5 +5,7 @@ spring:
       max-file-size: 20MB
       file-size-threshold: 2KB
       max-request-size: 215MB
+  application:
+    name: Testing Spring Features
 file:
   upload-dir: E:/Programming/java/files

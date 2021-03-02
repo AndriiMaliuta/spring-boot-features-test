@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -19,7 +20,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class SpringTestingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringTestingApplication.class, args);
+		ApplicationContext context = SpringApplication.run(SpringTestingApplication.class, args);
+		log.info(">>>>>>>>>>>>>>>>>>> App name = " + context.getApplicationName());
+		log.info(">>>>>>>>>>>>>>>>>>> App display name = " + context.getDisplayName());
+		log.info(">>>>>>>>>>>>>>>>>>> App ID == " + context.getId());
 	}
 
 //	@Bean
