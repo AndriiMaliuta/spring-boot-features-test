@@ -1,10 +1,13 @@
 package com.anma.bh.sb.springtesting;
 
 import com.anma.bh.sb.springtesting.core.models.Building;
+import com.anma.bh.sb.springtesting.core.props.TestProps;
 import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +17,14 @@ import java.util.UUID;
 
 @Component
 @Log
+@PropertySource("classpath:application.properties")
 public class Bootstrap implements CommandLineRunner {
 
     @Autowired
     private BuildingRepository buildingRepository;
+
+    @Value("${values.value1}")
+    private String value1;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -53,6 +60,11 @@ public class Bootstrap implements CommandLineRunner {
                 .street("Lisova")
                 .build();
 
+        TestProps testProps = new TestProps();
+
+        log.info(">>>>> test Props: " + testProps.getName());
+        log.info(">>>>> test Props: " + testProps.getAge());
+        log.info(">>>>> Value1 from Props: " + value1);
 //        List<Object[]> batchArgs = new ArrayList<>();
 //        batchArgs.add(new Object[] { building3.getId().toString() });
 //        batchArgs.add(new Object[] { building3.getStreet() });

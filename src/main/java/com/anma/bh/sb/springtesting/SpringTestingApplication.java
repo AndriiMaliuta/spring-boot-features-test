@@ -1,11 +1,13 @@
 package com.anma.bh.sb.springtesting;
 
 import com.anma.bh.sb.springtesting.core.models.Post;
+import com.anma.bh.sb.springtesting.core.props.TestProps;
 import com.anma.bh.sb.springtesting.files.FileStorageProperties;
 import lombok.extern.java.Log;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +16,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Log
 @SpringBootApplication
 @EnableScheduling
-@EnableConfigurationProperties({
-		FileStorageProperties.class
-})
+//@EnableConfigurationProperties({
+//		FileStorageProperties.class, TestProps.class
+//})
+@ConfigurationPropertiesScan("com.anma.bh.sb.springtesting")
 public class SpringTestingApplication {
 
 	public static void main(String[] args) {
