@@ -9,3 +9,6 @@ spring:
     name: Testing Spring Features
 file:
   upload-dir: E:/Programming/java/files
+test:
+  name: Vasyl
+  age: 42
