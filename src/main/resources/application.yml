@@ -7,3 +7,6 @@ spring:
       max-request-size: 215MB
 file:
   upload-dir: E:/Programming/java/files
+cat:
+  name: Murzik
+  age: 6
