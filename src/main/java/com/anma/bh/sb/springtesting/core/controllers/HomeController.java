@@ -17,6 +17,7 @@ public class HomeController {
 
         System.out.println("////////////" + LocalDateTime.now());
 
+        // Testing Servlet request data:
         System.out.println("Context Path = " + request.getContextPath());
         System.out.println("Remote user = " + request.getRemoteUser());
         System.out.println("Servlet Path == " + request.getServletPath());
@@ -43,7 +44,6 @@ public class HomeController {
         Map<String, String[]> paramsMap = request.getParameterMap();
 
         Enumeration<String> paramNames = request.getParameterNames();
-
         System.out.println("++++++++ Parameters:");
 
         while (paramNames.hasMoreElements()) {

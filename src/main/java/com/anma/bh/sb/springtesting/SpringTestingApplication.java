@@ -1,6 +1,7 @@
 package com.anma.bh.sb.springtesting;
 
 import com.anma.bh.sb.springtesting.core.models.Post;
+import com.anma.bh.sb.springtesting.core.props.TestProps;
 import com.anma.bh.sb.springtesting.files.FileStorageProperties;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,11 +18,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableConfigurationProperties({
 		FileStorageProperties.class,
-		SpringTestingApplication.Dog.class
+		SpringTestingApplication.Dog.class,
+		TestProps.class
 })
 public class SpringTestingApplication {
 
-	@Value("${cat.name}") String name;
+	@Value("${cat.name}")
+	String name;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringTestingApplication.class, args);

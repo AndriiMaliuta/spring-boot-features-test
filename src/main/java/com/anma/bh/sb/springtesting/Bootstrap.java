@@ -59,6 +59,8 @@ public class Bootstrap implements CommandLineRunner {
                 .houseNumber(21)
                 .street("Lisova")
                 .build();
+        log.info("*** Building created " + building3.toString());
+        buildingRepository.save(building3);
 
         TestProps testProps = new TestProps();
 
