@@ -27,7 +27,7 @@ public class BuildingController {
     public String getBuildingsPage(Model model) {
 
         Pageable buildingPageable = PageRequest.of(1,10);
-        
+
 
         List<Map<String, Object>> buildings = jdbcTemplate.query("select * from buildings", new Building[] {}, new ColumnMapRowMapper());
         log.info("**** " + buildings);
