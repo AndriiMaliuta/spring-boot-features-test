@@ -56,7 +56,7 @@ public class Bootstrap implements CommandLineRunner {
         Building building3 = Building.builder()
                 .id(UUID.randomUUID())
                 .entrance(3)
-                .houseNumber(21)
+                .houseNumber(12)
                 .street("Lisova")
                 .build();
         log.info("*** Building created " + building3.toString());

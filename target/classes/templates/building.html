@@ -8,10 +8,16 @@
 <body>
     <h2>Buildings</h2>
 
-    <div th:each="building : ${buildings}">
+    <div style="border: 1px solid blue; padding: 3px;margin: 3px" th:each="building : ${buildings}">
         <p th:text="${building.BUILDING_ID}"></p>
         <p th:text="${building.ENTRANCE}"></p>
         <p th:text="${building.HOUSE_NUMBER}"></p>
+    </div>
+
+    <div th:each="building : ${buildingsNumber12}">
+        <p th:text="${building.id}"></p>
+        <p th:text="${building.entrance}"></p>
+        <p th:text="${building.houseNumber}"></p>
     </div>
 </body>
 
