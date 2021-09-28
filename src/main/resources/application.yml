@@ -6,7 +6,7 @@ spring:
       file-size-threshold: 2KB
       max-request-size: 215MB
 file:
-  upload-dir: E:/Programming/java/files
+  upload-dir: /home/andrii/programming/spring/spring-boot-features-test/uploads
 cat:
   name: Murzik
   age: 6

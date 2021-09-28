@@ -17,14 +17,29 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
+//https://www.callicoder.com/spring-boot-file-upload-download-rest-api-example/
+//https://www.callicoder.com/spring-boot-file-upload-download-jpa-hibernate-mysql-database-example/
+
 @Service
 public class FileStorageService implements StorageService {
 
-    private final Path rootLocation;
+    private final Path fileStorageLocation;
+
+//    @Autowired
+//    public FileStorageService(FileStorageProperties fileStorageProperties) {
+//        this.rootLocation = Paths.get(fileStorageProperties.getLocation());
+//    }
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
-        this.rootLocation = Paths.get(fileStorageProperties.getLocation());
+        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
+                .toAbsolutePath().normalize();
+
+        try {
+            Files.createDirectories(this.fileStorageLocation);
+        } catch (Exception ex) {
+            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
     }
 
     @Override
@@ -35,10 +50,10 @@ public class FileStorageService implements StorageService {
                 throw new FileStorageException("Failed to store empty file.");
             }
 
-            Path destinationFile = this.rootLocation.resolve(
+            Path destinationFile = this.fileStorageLocation.resolve(
                     Paths.get(file.getOriginalFilename()))
                     .normalize().toAbsolutePath();
-            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
+            if (!destinationFile.getParent().equals(this.fileStorageLocation.toAbsolutePath())) {
                 // This is a security check
                 throw new FileStorageException(
                         "Cannot store file outside current directory.");
@@ -55,9 +70,9 @@ public class FileStorageService implements StorageService {
     @Override
     public Stream<Path> loadAll() {
         try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(this.rootLocation::relativize);
+            return Files.walk(this.fileStorageLocation, 1)
+                    .filter(path -> !path.equals(this.fileStorageLocation))
+                    .map(this.fileStorageLocation::relativize);
         }
         catch (IOException e) {
             throw new FileStorageException("Failed to read stored files", e);
@@ -67,7 +82,7 @@ public class FileStorageService implements StorageService {
 
     @Override
     public Path load(String filename) {
-        return rootLocation.resolve(filename);
+        return fileStorageLocation.resolve(filename);
     }
 
     @Override
@@ -91,16 +106,51 @@ public class FileStorageService implements StorageService {
 
     @Override
     public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
+        FileSystemUtils.deleteRecursively(fileStorageLocation.toFile());
     }
     @Override
     public void init() {
         try {
-            Files.createDirectories(rootLocation);
+            Files.createDirectories(fileStorageLocation);
         }
         catch (IOException e) {
             throw new FileStorageException("Could not initialize storage", e);
         }
     }
+
+    public String storeFile(MultipartFile file) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+
+    public Resource loadFileAsResource(String fileName) {
+        try {
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                return resource;
+            } else {
+                throw new MyFileNotFoundException("File not found " + fileName);
+            }
+        } catch (MalformedURLException ex) {
+            throw new MyFileNotFoundException("File not found " + fileName, ex);
+        }
+    }
+
 
 }
