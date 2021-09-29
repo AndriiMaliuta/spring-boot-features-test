@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Log
 public class ScheduledTask {
 
-//    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 60000)
     public void reportTime() {
         log.info("Current time is: " + LocalDateTime.now());
     }

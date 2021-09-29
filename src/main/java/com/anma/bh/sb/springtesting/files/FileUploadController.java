@@ -1,5 +1,6 @@
 package com.anma.bh.sb.springtesting.files;
 
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+@Timed
 @Controller
 public class FileUploadController {
 
@@ -30,7 +32,7 @@ public class FileUploadController {
     public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+                path -> MvcUriComponentsBuilder.fromMethodName(FileRESTController.class,
                         "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList()));
 
