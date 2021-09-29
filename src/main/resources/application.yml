@@ -23,13 +23,14 @@ management:
 ### LOGGING - https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging
 logging:
   file:
-    name: "log${DATE}"
+    name: "logFile"
   logback:
     rollingpolicy:
-      max-file-size: 20MB
+      max-file-size: "20MB"
       max-history: 10   # 10 days
+#      file-name-pattern: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz)"
   level:
-    root: "debug"
+    root: "info"
     org.springframework.web: "info"
     org.hibernate: "error"
 
