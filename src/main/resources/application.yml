@@ -20,3 +20,51 @@ management:
     export:
       jmx:
         enabled: true
+### LOGGING - https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging
+logging:
+  file:
+    name: "log${DATE}"
+  logback:
+    rollingpolicy:
+      max-file-size: 20MB
+      max-history: 10   # 10 days
+  level:
+    root: "debug"
+    org.springframework.web: "info"
+    org.hibernate: "error"
+
+    # logging.exception-conversion-word
+    #LOG_EXCEPTION_CONVERSION_WORD
+    #The conversion word used when logging exceptions.
+    #
+    #logging.file.name
+    #LOG_FILE
+    #If defined, it is used in the default log configuration.
+    #
+    #logging.file.path
+    #LOG_PATH
+    #If defined, it is used in the default log configuration.
+    #
+    #logging.pattern.console
+    #CONSOLE_LOG_PATTERN
+    #The log pattern to use on the console (stdout).
+    #
+    #logging.pattern.dateformat
+    #LOG_DATEFORMAT_PATTERN
+    #Appender pattern for log date format.
+    #
+    #logging.charset.console
+    #CONSOLE_LOG_CHARSET
+    #The charset to use for console logging.
+    #
+    #logging.pattern.file
+    #FILE_LOG_PATTERN
+    #The log pattern to use in a file (if LOG_FILE is enabled).
+    #
+    #logging.charset.file
+    #FILE_LOG_CHARSET
+    #The charset to use for file logging (if LOG_FILE is enabled).
+    #
+    #logging.pattern.level
+    #LOG_LEVEL_PATTERN
+    #The format to use when rendering the log level (default %5p).
