@@ -7,7 +7,7 @@
 <body>
 
 <div>
-    <a href="" th:href="@{${fileName}}" download="">Excel</a>
+    <a href="" th:href="@{${fileName}}" download="">FILE</a>
     <br>
     <p th:text="${fileName}"></p>
     <a href="/text1.txt" download="">Text</a>
@@ -16,7 +16,11 @@
     <br>
     <a href="../files/doc-test-1.docx" download="">Doc</a>
     <br>
-    <a href="/files/excel1.xlsx" download="">excel</a>
+    <a href="/uploads/aaa.txt" download="">aaa</a>
+    <br>
+    <a href="/uploads/bbb.excel" download="">bbb excel</a>
+    <br>
+    <a href="/uploads/new.txt" download="">uploads</a>
     <br>
 </div>
 

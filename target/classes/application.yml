@@ -30,7 +30,7 @@ logging:
       max-history: 10   # 10 days
 #      file-name-pattern: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz)"
   level:
-    root: "debug"
+    root: "info"
     org.springframework.web: "info"
     org.hibernate: "error"
 
