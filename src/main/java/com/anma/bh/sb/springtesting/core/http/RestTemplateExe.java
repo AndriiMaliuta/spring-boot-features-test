@@ -2,7 +2,6 @@ package com.anma.bh.sb.springtesting.core.http;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lombok.extern.java.Log;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +14,6 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 @RestController
-@Log
 public class RestTemplateExe {
 
     RestTemplate restTemplate = new RestTemplate();
@@ -23,7 +21,6 @@ public class RestTemplateExe {
 
     @GetMapping("/rest/http")
     public String testRestTemplate() {
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application","json"));
         HttpEntity<?> requestEntity = new HttpEntity<Object>(headers);
@@ -68,9 +65,9 @@ public class RestTemplateExe {
 
         java.net.http.HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        log.info(dogJson);
-        log.info(requestBody2);
-        log.info(">>>> dog is " + response);
+        System.out.println(dogJson);
+        System.out.println(requestBody2);
+        System.out.println(">>>> dog is " + response);
 
         return ResponseEntity.ok(response.body());
     }

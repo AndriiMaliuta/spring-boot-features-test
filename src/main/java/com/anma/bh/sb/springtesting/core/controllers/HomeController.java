@@ -3,7 +3,7 @@ package com.anma.bh.sb.springtesting.core.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Enumeration;
@@ -34,7 +34,6 @@ public class HomeController {
 //        }
 
         Enumeration<String> attrNames = request.getAttributeNames();
-
 
         System.out.println("++++++++ Attributes:");
         while (attrNames.hasMoreElements()) {

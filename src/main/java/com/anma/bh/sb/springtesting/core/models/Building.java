@@ -1,20 +1,9 @@
 package com.anma.bh.sb.springtesting.core.models;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.UUID;
 
-@Entity
-@Data
-@Builder
 @Table(name = "buildings")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Building {
 
     @Id
@@ -28,4 +17,35 @@ public class Building {
 
     private int entrance;
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(int houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public int getEntrance() {
+        return entrance;
+    }
+
+    public void setEntrance(int entrance) {
+        this.entrance = entrance;
+    }
 }

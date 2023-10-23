@@ -2,7 +2,6 @@ package com.anma.bh.sb.springtesting.core.controllers;
 
 import com.anma.bh.sb.springtesting.core.models.Building;
 import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,13 +17,15 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@Log
 public class BuildingController {
+    private final JdbcTemplate jdbcTemplate;
+    private final BuildingRepository buildingRepository;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private BuildingRepository buildingRepository;
+    public BuildingController(JdbcTemplate jdbcTemplate, BuildingRepository buildingRepository) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.buildingRepository = buildingRepository;
+    }
 
     @GetMapping("/building")
     public String getBuildingsPage(Model model, @RequestParam(defaultValue = "2") int entrance) {
@@ -34,7 +35,9 @@ public class BuildingController {
         List<Building> buildingsNumber12 = buildingRepository.findAllByEntrance(entrance, buildingPageable);
 
         List<Map<String, Object>> buildings = jdbcTemplate.query("select * from buildings", new Building[] {}, new ColumnMapRowMapper());
-        log.info("**** " + buildings);
+
+        System.out.println("**** " + buildings);
+
         model.addAttribute("buildings", buildings);
         model.addAttribute("buildingsNumber12", buildingsNumber12);
 

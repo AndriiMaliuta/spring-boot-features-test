@@ -4,11 +4,12 @@ import com.anma.bh.sb.springtesting.core.controllers.ExcelController;
 import com.anma.bh.sb.springtesting.core.models.Building;
 import com.anma.bh.sb.springtesting.core.props.TestProps;
 import com.anma.bh.sb.springtesting.core.repositories.BuildingRepository;
-import lombok.extern.java.Log;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -17,26 +18,26 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Component
-@Log
 @PropertySource("classpath:application.properties")
 public class Bootstrap implements CommandLineRunner {
+    public static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
 
-    @Autowired
-    private BuildingRepository buildingRepository;
+    private final BuildingRepository buildingRepository;
+    private final JdbcTemplate jdbcTemplate;
 
     @Value("${values.value1}")
     private String value1;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public Bootstrap(BuildingRepository buildingRepository, JdbcTemplate jdbcTemplate) {
+        this.buildingRepository = buildingRepository;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -64,14 +65,14 @@ public class Bootstrap implements CommandLineRunner {
                 cell.setCellValue("TEST");
             }
         }
-        log.info(ExcelController.class.getClassLoader().getResource("static/files/doc-test-1.docx").getFile().toString());
+        LOG.info(ExcelController.class.getClassLoader().getResource("static/files/doc-test-1.docx").getFile().toString());
         //  /home/andrii/programming/spring/spring-boot-features-test/target/spring-testing-0.0.2.jar!/BOOT-INF/classes!/files/test
 
 //        final String FILE_NAME = "/home/andrii/programming/spring/spring-boot-features-test/src/main/resources/files/test-excel.xlsx";
 //        final String FILE_NAME = "/home/andrii/programming/spring/spring-boot-features-test/target/spring-testing-0.0.2.jar!/BOOT-INF/classes!/static/files/test-excel.xlsx";
         try {
             final String FILE_NAME = "./src/main/resources/static/excel2.xlsx";
-            log.info(ResourceUtils.getFile("classpath:application.properties").toString());
+            LOG.info(ResourceUtils.getFile("classpath:application.properties").toString());
             FileOutputStream stream = new FileOutputStream(FILE_NAME);
             workbook.write(stream);
             workbook.close();
@@ -81,38 +82,32 @@ public class Bootstrap implements CommandLineRunner {
     }
 
     private void loadData() {
-        Building building1 = Building.builder()
-                .id(UUID.randomUUID())
-                .entrance(1)
-                .houseNumber(12)
-                .street("Shevchenko")
-                .build();
-        log.info("*** Building created " + building1.toString());
-        buildingRepository.save(building1);
+        Building building = new Building();
+        building.setId(UUID.randomUUID());
+        building.setEntrance(1);
+        building.setHouseNumber(12);
+        building.setStreet("Shevchenko");
 
-        Building building2 = Building.builder()
-                .id(UUID.randomUUID())
-                .entrance(2)
-                .houseNumber(34)
-                .street("Tsentralna")
-                .build();
-        log.info("*** Building created " + building2.toString());
+        LOG.info("*** Building created " + building.toString());
+
+        buildingRepository.save(building);
+
+        Building building2 = new Building();
+        building2.setId(UUID.randomUUID());
+        building2.setEntrance(2);
+        building2.setHouseNumber(34);
+        building2.setStreet("Tsentralna");
+
+        LOG.info("*** Building created " + building2.toString());
+
         buildingRepository.save(building2);
-
-        Building building3 = Building.builder()
-                .id(UUID.randomUUID())
-                .entrance(3)
-                .houseNumber(12)
-                .street("Lisova")
-                .build();
-        log.info("*** Building created " + building3.toString());
-        buildingRepository.save(building3);
 
         TestProps testProps = new TestProps();
 
-        log.info(">>>>> test Props: " + testProps.getName());
-        log.info(">>>>> test Props: " + testProps.getAge());
-        log.info(">>>>> Value1 from Props: " + value1);
+        LOG.info(">>>>> test Props: " + testProps.getName());
+        LOG.info(">>>>> test Props: " + testProps.getAge());
+        LOG.info(">>>>> Value1 from Props: " + value1);
+
 //        List<Object[]> batchArgs = new ArrayList<>();
 //        batchArgs.add(new Object[] { building3.getId().toString() });
 //        batchArgs.add(new Object[] { building3.getStreet() });
@@ -120,7 +115,7 @@ public class Bootstrap implements CommandLineRunner {
 //        batchArgs.add(new Object[] { String.valueOf(building3.getEntrance()) });
 //
 //        int[] created = jdbcTemplate.batchUpdate("insert into buildings (building_id, street, house_number, entrance) values (?, ?, ?, ?)", batchArgs);
-//        log.info("***** Created building with JDBC Template " + created.length);
+//        LOG.info("***** Created building with JDBC Template " + created.length);
 
     }
 }

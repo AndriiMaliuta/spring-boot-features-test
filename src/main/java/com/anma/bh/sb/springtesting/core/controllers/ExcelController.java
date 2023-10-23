@@ -1,11 +1,12 @@
 package com.anma.bh.sb.springtesting.core.controllers;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +25,8 @@ import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Set;
 
 @Controller
-@Slf4j
 public class ExcelController {
-
+    private final Logger LOG = LoggerFactory.getLogger(ExcelController.class);
     @GetMapping("/excel")
     public String getExcelPage(Model model) {
 
@@ -34,7 +34,6 @@ public class ExcelController {
 //        model.addAttribute("fileName", FILE_NAME);
 
 //        try {
-            log.info("test");
 //            new InputStreamReader()
 //            log.info(Files.readString(Paths.get("../src/main/resources/application.yml")));
 //            log.info(new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("111.txt"))).readLine());
@@ -62,7 +61,7 @@ public class ExcelController {
 
         model.addAttribute("fileName", fileName);
         Path createdFIle = Files.createFile(Paths.get("/uploads/" + fileName), PosixFilePermissions.asFileAttribute(Set.of(PosixFilePermission.GROUP_WRITE)));
-        log.info(">>> created file " + createdFIle.getFileName());
+        System.out.println(">>> created file " + createdFIle.getFileName());
 
         return "redirect:/excel";
     }

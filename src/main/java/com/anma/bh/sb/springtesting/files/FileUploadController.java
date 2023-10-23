@@ -15,15 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Timed
 @Controller
 public class FileUploadController {
-
-    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileUploadController.class);
 
     @Autowired
     private FileStorageService storageService;
