@@ -9,15 +9,16 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
 @EnableJpaRepositories
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({
 		FileStorageProperties.class,
 		TestProps.class
@@ -29,7 +30,6 @@ public class SpringTestingApplication {
 	String name;
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(SpringTestingApplication.class, args);
 
 //		SpringApplication app = new SpringApplication(SpringTestingApplication.class);
@@ -42,7 +42,7 @@ public class SpringTestingApplication {
 	@Bean
 	CommandLineRunner run() {
 		return args -> {
-			LOG.info("&&&&&&&&&&&&& Cat name is " + name);
+			LOG.info("%clr(%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}){yellow}CommandLineRunner :: >>> Cat name is " + name);
 		};
 	}
 

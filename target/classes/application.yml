@@ -1,4 +1,13 @@
+server:
+  port: 8888
 spring:
+  application:
+    name: Spring Boot Devbox
+    admin:
+      enabled: true
+  output:
+    ansi:
+      enabled: always
   datasource:
     url: jdbc:postgresql://172.17.0.3:5432/buildings
     username: dev
@@ -16,6 +25,10 @@ spring:
       max-file-size: 20MB
       file-size-threshold: 2KB
       max-request-size: 215MB
+  task:
+    execution:
+      pool:
+        max-size: 20
 file:
   upload-dir: "/home/andrii/prog/spring/spring-boot-features-test/uploads"
 cat:
@@ -27,11 +40,10 @@ management:
     web:
       exposure:
         include: "*"
-
 ### LOGGING - https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging
 logging:
   file:
-    name: "logFile"
+    name: "logs/app.log"
   logback:
     rollingpolicy:
       max-file-size: "20MB"
@@ -42,38 +54,8 @@ logging:
     org.springframework.web: "info"
     org.hibernate: "error"
 
-    # logging.exception-conversion-word
-    #LOG_EXCEPTION_CONVERSION_WORD
-    #The conversion word used when logging exceptions.
-    #
-    #logging.file.name
-    #LOG_FILE
-    #If defined, it is used in the default log configuration.
-    #
-    #logging.file.path
-    #LOG_PATH
-    #If defined, it is used in the default log configuration.
-    #
-    #logging.pattern.console
-    #CONSOLE_LOG_PATTERN
-    #The log pattern to use on the console (stdout).
-    #
-    #logging.pattern.dateformat
-    #LOG_DATEFORMAT_PATTERN
-    #Appender pattern for log date format.
-    #
-    #logging.charset.console
-    #CONSOLE_LOG_CHARSET
-    #The charset to use for console logging.
-    #
-    #logging.pattern.file
-    #FILE_LOG_PATTERN
-    #The log pattern to use in a file (if LOG_FILE is enabled).
-    #
-    #logging.charset.file
-    #FILE_LOG_CHARSET
-    #The charset to use for file logging (if LOG_FILE is enabled).
-    #
-    #logging.pattern.level
-    #LOG_LEVEL_PATTERN
-    #The format to use when rendering the log level (default %5p).
+---
+spring:
+  config:
+    activate:
+      on-profile: cloud
