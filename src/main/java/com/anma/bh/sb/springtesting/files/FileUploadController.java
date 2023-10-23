@@ -1,6 +1,5 @@
 package com.anma.bh.sb.springtesting.files;
 
-import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-@Timed
+//@Timed
 @Controller
 public class FileUploadController {
     private static final Logger LOG = LoggerFactory.getLogger(FileUploadController.class);

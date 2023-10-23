@@ -1,22 +1,14 @@
 package com.anma.bh.sb.springtesting.consume;
 
-import com.anma.bh.sb.springtesting.core.models.Post;
+import com.anma.bh.sb.springtesting.core.models.dto.Post;
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
 
 //import org.json.JSONObject;
 

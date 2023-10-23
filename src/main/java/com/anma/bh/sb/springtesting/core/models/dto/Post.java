@@ -1,4 +1,4 @@
-package com.anma.bh.sb.springtesting.core.models;
+package com.anma.bh.sb.springtesting.core.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.RepresentationModel;

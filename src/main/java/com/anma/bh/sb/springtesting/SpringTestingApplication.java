@@ -12,13 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableJpaRepositories
 @EnableConfigurationProperties({
 		FileStorageProperties.class,
-		SpringTestingApplication.Dog.class,
 		TestProps.class
 })
 public class SpringTestingApplication {
@@ -28,13 +29,12 @@ public class SpringTestingApplication {
 	String name;
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(SpringTestingApplication.class);
 
-//		SpringApplication.run(SpringTestingApplication.class, args);
+		SpringApplication.run(SpringTestingApplication.class, args);
 
-		app.setBannerMode(Banner.Mode.CONSOLE);
-		app.run(args);
-
+//		SpringApplication app = new SpringApplication(SpringTestingApplication.class);
+//		app.setBannerMode(Banner.Mode.CONSOLE);
+//		app.run(args);
 //		ApplicationContext applicationContext = ApplicationContextFactory.DEFAULT.create(...).getParent();
 
 	}
@@ -43,7 +43,6 @@ public class SpringTestingApplication {
 	CommandLineRunner run() {
 		return args -> {
 			LOG.info("&&&&&&&&&&&&& Cat name is " + name);
-			LOG.info("&&&&&&&&&&&&& Dog name is " + new Dog().name);
 		};
 	}
 
@@ -51,10 +50,5 @@ public class SpringTestingApplication {
 //	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 //		return builder.build();
 //	}
-
-	@ConfigurationProperties(prefix = "dog")
-	class Dog {
-		String name = "Sharko";
-	}
 
 }

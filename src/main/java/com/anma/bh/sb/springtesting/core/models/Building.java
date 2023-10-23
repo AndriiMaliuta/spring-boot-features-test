@@ -3,6 +3,7 @@ package com.anma.bh.sb.springtesting.core.models;
 import jakarta.persistence.*;
 import java.util.UUID;
 
+@Entity
 @Table(name = "buildings")
 public class Building {
 

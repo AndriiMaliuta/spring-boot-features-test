@@ -1,12 +1,15 @@
 spring:
   datasource:
-    url: ${DB_URL}
+    url: jdbc:postgresql://172.17.0.3:5432/buildings
     username: dev
     password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   servlet:
     multipart:
       enabled: true
@@ -24,10 +27,7 @@ management:
     web:
       exposure:
         include: "*"
-  metrics:
-    export:
-      jmx:
-        enabled: true
+
 ### LOGGING - https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging
 logging:
   file:
