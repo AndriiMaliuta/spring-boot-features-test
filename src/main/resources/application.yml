@@ -1,3 +1,4 @@
+
 server:
   port: 8888
   error:
@@ -37,11 +38,24 @@ cat:
   name: Murzik
   age: 6
 management:
+  info:
+    git:
+      mode: full
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  endpoint:
+    health:
+      enabled: true
   endpoints:
     enabled-by-default: true
     web:
       exposure:
         include: "*"
+    jmx:
+      exposure:
+        include: health
 ### LOGGING - https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging
 logging:
   file:
@@ -55,6 +69,10 @@ logging:
     root: "info"
     org.springframework.web: "info"
     org.hibernate: "error"
+info:
+  app:
+    java:
+      source: 21
 
 ---
 spring:
